@@ -5,13 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".HomeActivity">
 
-    <ImageView
-        android:padding="16dp"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/official_logo"
-        />
+        android:layout_height="wrap_content"
+        android:text="Hello"/>
 
 </android.widget.LinearLayout>
