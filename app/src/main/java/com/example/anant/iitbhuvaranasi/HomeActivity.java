@@ -1,5 +1,6 @@
 package com.example.anant.iitbhuvaranasi;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -55,7 +56,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         new ComplainFragment()).commit();
                 break;
             case R.id.nav_about:
-                Toast.makeText(this, "Info", Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(this, ClubFeed.class);
+                startActivity(intent);
+
                 break;
             case R.id.nav_logout:
                 Toast.makeText(this, "bye bye", Toast.LENGTH_SHORT).show();
