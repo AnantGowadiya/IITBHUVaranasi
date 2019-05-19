@@ -6,109 +6,137 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context=".ClubFeed"
-    android:padding="15dp">
+    tools:context=".ClubFeed">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:weightSum="5"
         android:padding="15dp">
-
 
         <ImageView
             android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="8"
             android:background="@color/colorPrimary"
+            android:orientation="horizontal"
             android:padding="5dp"
-            >
+            android:weightSum="8">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="TITLE"
-                android:textColor="#FFF"
                 android:layout_weight="7"
-                android:textFontWeight="9"
                 android:background="@color/colorPrimary"
-
-                android:textSize="30sp"
+                android:text="@string/event_title"
                 android:textAlignment="center"
-                    android:textStyle="bold"/>
+                android:textColor="#FFF"
+                android:textFontWeight="9"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
+            <ImageButton
+                android:id="@+id/plus"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ic_expand_more_black_24dp"
+                android:clickable="true"
+                android:contentDescription="@string/expand_event" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="@string/event_venue"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_weight="70"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_place_black_24dp"
+                android:id="@+id/location"
+                android:layout_weight="15"
+                android:clickable="true"
+                android:contentDescription="Get event location"
+                android:background="@color/colorPrimary"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_share_black_24dp"
+                android:id="@+id/share"
+                android:layout_weight="15"
+                android:clickable="true"
+                android:contentDescription="Share"
+                android:background="@color/colorPrimary"/>
 
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="7">
 
-    <TextView
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Venue"
-        android:textColor="#FFF"
-        android:textAlignment="center"
-        android:textSize="15sp"
-        android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/event_date"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="7"
-    android:layout_gravity="center"
-    android:background="@color/colorPrimary"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/event_time"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-    android:padding="10dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:textColor="#FFF"
-        android:textAlignment="center"
-        android:textSize="15sp"
-        android:layout_weight="3"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time"
-        android:textColor="#FFF"
-        android:textSize="15sp"
-        android:layout_weight="3"
-        android:textAlignment="center"
-        android:textStyle="bold"/>
-    <ImageButton
-        android:id="@+id/plus"
-        android:layout_weight="1"
-
-        android:layout_width="0dp"
-
-        android:layout_height="match_parent"
-        android:background="@drawable/ic_expand_more_black_24dp"
-        android:clickable="true" />
-
-</LinearLayout>
+            <ImageButton
+                android:id="@+id/clock"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:contentDescription="@string/set_event_time_calender"
+                android:src="@drawable/ic_access_time_black_24dp"
+                android:clickable="true"/>
+        </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ffffff"
-            android:gravity="right">
-
-
+            android:gravity="right"
+            android:orientation="vertical">
 
 
             <ImageButton
@@ -120,41 +148,32 @@
                 android:visibility="gone" />
 
         </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bonsai Kitten was a hoax website that claimed to provide instructions
-         on how to grow a kitten in a jar, so as to mold the bones of the kitten into the
-          shape of the jar as the cat grows, much like how a bonsai plant is shaped. It was
-         made by an MIT university student going by the alias of Dr. Michael Wong Chang.
-         The website generated furor after members of the public complained to animal rights
-          organizations. The Michigan Society for the Prevention of Cruelty to Animals
-          (MSPCA) stated that content may be faked, the issue it is campaigning for may create
-           violence towards animals. Although the website was shut down some time ago,
-      petitions are still circulated to shut down the site or complain to its ISP.
-      The website has been debunked by several organizations including Snopes.com and
-      the Humane Society of the United States."
-        android:id="@+id/content"
-        />
 
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/event_description" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="COMING" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="COMING"
+                android:background="@drawable/round_shape"/>
 
-         <Button
-             android:layout_weight="1"
-                 android:layout_width="0dp"
-                 android:layout_height="match_parent"
-              android:text="Interested" />
-</LinearLayout>
+            <Button
+                android:layout_width="7dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Interested"
+                android:background="@drawable/round_shape"/>
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>
