@@ -1,32 +1,25 @@
 package com.example.anant.iitbhuvaranasi;
 
-public class SingleHorizontaldata {
+public class SingleHorizontaldata{
 
-    private int images;
-    private String title;
+    private int image;
+    //private String title;
 
     public SingleHorizontaldata() {
 
     }
 
-    public SingleHorizontaldata(int images, String title) {
-        this.images = images;
-        this.title = title;
+    public SingleHorizontaldata(int image) {
+        this.image = image;
+       //this.title = title;
     }
 
-    public int getImages() {
-        return images;
+    public int getImage() {
+        return image;
     }
 
-    public void setImages(int images) {
-        this.images = images;
+    public void setImage(int image) {
+        this.image = image;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

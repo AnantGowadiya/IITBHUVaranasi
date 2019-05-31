@@ -2,17 +2,33 @@ package com.example.anant.iitbhuvaranasi;
 
 public class SingleVerticalData {
 
-    private String header, description;
+    private String header;
+    private String date;
+    private String council;
     private int image;
+
+
+
+    private int event_image_club;
 
     public SingleVerticalData(){
 
     }
 
-    public SingleVerticalData(String header, String description, int image) {
+    public SingleVerticalData(String council,String header, String date, int image,int event_image_club) {
         this.header = header;
-        this.description = description;
+        this.council = council;
+        this.date = date;
         this.image = image;
+        this.event_image_club=event_image_club;
+    }
+
+    public String getCouncil() {
+        return council;
+    }
+
+    public void setCouncil(String council) {
+        this.council = council;
     }
 
     public String getHeader() {
@@ -23,12 +39,20 @@ public class SingleVerticalData {
         this.header = header;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDate() {
+        return date;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getEvent_image_club() {
+        return event_image_club;
+    }
+
+    public void setEvent_image_club(int event_image_club) {
+        this.event_image_club = event_image_club;
     }
 
     public int getImage() {

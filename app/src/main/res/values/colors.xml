@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#8D467E</color>
+    <color name="feed_background">#536dfe</color>
+    <color name="colorPrimaryDark">#8D467E</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="black_color">#000000</color>
+    <color name="white_color">#FFFFFF</color>
+
+    <color name="colorSecondary">#ffd740</color>
+
+    <color name="primaryTextColor">#fafafa</color>
+    <color name="secondaryTextColor">#000000</color>
+    <color name="colorGray">#757575</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="colorTagGreen">#AED581</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorGreen">#00FF00</color>
+    <!-- Map -->
+    <item name="transparent_black" type="color">#20000000</item>
+    <item name="list_item_gray_even" type="color">#ffe6e6e6</item>
 </resources>
