@@ -42,6 +42,10 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
         holder.image_club.setImageResource(data.get(position).getEvent_image_club());
         holder.title.setText(data.get(position).getHeader());
         holder.council.setText(data.get(position).getCouncil());
+
+
+
+
         final Pair[] pairs=new Pair[3];
         pairs[0]=new Pair<View,String>(holder.image,"fullscreen");
         pairs[1]=new Pair<View,String>(holder.title,"feedtitle");
@@ -60,7 +64,7 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
 
 
         holder.date.setText(data.get(position).getDate());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(mcontext,Feedfragment_notifcation_Activity.class);

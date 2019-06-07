@@ -3,59 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="#FFFFFF"
     android:layout_margin="4dp"
-    app:cardElevation="4dp"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
     app:cardCornerRadius="4dp"
-    >
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <LinearLayout
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="4dp"
-            android:layout_marginLeft="8dp"
             android:orientation="horizontal"
-            android:paddingLeft="8dp">
+            android:paddingStart="8dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/event_image_club"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginRight="8dp"
+                android:layout_alignParentStart="true"
                 android:layout_marginTop="4dp"
-                app:srcCompat="@drawable/logo"
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/logo"
-                />
+                app:srcCompat="@drawable/logo" />
 
-            <LinearLayout
+
+            <TextView
+                android:id="@+id/event_title_council"
+                android:layout_width="234dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_toLeftOf="@+id/eye_icon"
+                android:layout_toEndOf="@id/event_image_club"
+                android:paddingTop="8dp"
+                android:text="Text View "
+                android:textColor="@color/black_color"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/eye_icon"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="236dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_toStartOf="@+id/view_count"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_eye_view" />
+
+            <TextView
+                android:id="@+id/view_count"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="874" />
 
-                <TextView
-                    android:id="@+id/event_title_council"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingTop="8dp"
-                    android:text="TextView"
-                    android:layout_marginRight="10dp"
+        </RelativeLayout>
 
-                    android:textStyle="bold"
-                    android:textColor="@color/black_color"
-                    android:textSize="24sp" />
-
-                 />
-            </LinearLayout>
-
-        </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -72,58 +85,55 @@
                 />
 
 
-
-
         </FrameLayout>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/cardview_feedfragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/cardview_feedfragment"
             android:background="#FFFFFF"
+            android:orientation="vertical"
             app:cardBackgroundColor="@color/feed_background"
-            app:contentPadding="5dp"
-            >
+            app:contentPadding="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="12dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="12dp"
                 android:layout_weight="3"
                 android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/titles"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="10"
-                android:text="Title"
-                android:transitionName="feedtitle"
-                android:textColor="@color/white_color"
-                android:textSize="21sp"
-                android:textStyle="bold" />
-
-                <ImageButton
-                    android:id="@+id/share_event_button"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Share Event"
-                    android:src="@drawable/ic_share_black_24dp"
-                    android:tint="@color/white_color" />
-            </LinearLayout>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/titles"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:text="Title"
+                        android:textColor="@color/white_color"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        android:transitionName="feedtitle" />
+
+                    <ImageButton
+                        android:id="@+id/share_event_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Share Event"
+                        android:src="@drawable/ic_share_black_24dp"
+                        android:tint="@color/white_color" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -136,14 +146,12 @@
                         android:id="@+id/event_dates"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="10"
                         android:text="Date "
-                        android:transitionName="feed_date"
                         android:textColor="@color/white_color"
                         android:textColorLink="@color/white_color"
                         android:textSize="16sp"
-                        android:layout_weight="10"
-                        />
-
+                        android:transitionName="feed_date" />
 
 
                     <ImageButton
@@ -171,13 +179,38 @@
             </LinearLayout>
 
 
-
-
         </android.support.v7.widget.CardView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="100">
 
-
-       
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="45"
+                android:text="Going"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="300" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="45"
+                android:text="Interested" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:padding="15dp"
+                android:gravity="center"
+                android:text="300" />
+        </LinearLayout>
 
     </LinearLayout>
 </android.support.v7.widget.CardView>
