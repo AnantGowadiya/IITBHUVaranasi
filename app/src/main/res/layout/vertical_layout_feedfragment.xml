@@ -190,6 +190,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="45"
+                android:id="@+id/button_going"
                 android:text="Going"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -197,18 +198,21 @@
                 android:layout_weight="5"
                 android:gravity="center"
                 android:padding="15dp"
+                android:id="@+id/count_going"
                 android:text="300" />
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="45"
-                android:text="Interested" />
+                android:text="Interested"
+                android:id="@+id/button_interested"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:padding="15dp"
                 android:gravity="center"
+                android:id="@+id/count_interested"
                 android:text="300" />
         </LinearLayout>
 
