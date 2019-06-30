@@ -2,41 +2,50 @@ package com.example.anant.iitbhuvaranasi;
 
 public class SingleVerticalData {
 
-    private String header;
+    private String club,title;
     private String date;
-    private String council;
-    private int image;
-
-
-
-    private int event_image_club;
+    private String image_club;
+    private String image;
+    private String viewcount,interested,notifid;
 
     public SingleVerticalData(){
 
     }
 
-    public SingleVerticalData(String council,String header, String date, int image,int event_image_club) {
-        this.header = header;
-        this.council = council;
+
+
+    public SingleVerticalData(String club, String title, String date, String image_club, String image, String viewcount, String interested, String notifid) {
+        this.club = club;
+        this.title = title;
         this.date = date;
+        this.image_club = image_club;
         this.image = image;
-        this.event_image_club=event_image_club;
+        this.viewcount = viewcount;
+        this.interested = interested;
+        this.notifid=notifid;
+    }
+    public String getNotifid() {
+        return notifid;
     }
 
-    public String getCouncil() {
-        return council;
+    public void setNotifid(String notifid) {
+        this.notifid = notifid;
     }
 
-    public void setCouncil(String council) {
-        this.council = council;
+    public String getClub() {
+        return club;
     }
 
-    public String getHeader() {
-        return header;
+    public void setClub(String club) {
+        this.club = club;
     }
 
-    public void setHeader(String header) {
-        this.header = header;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDate() {
@@ -47,19 +56,35 @@ public class SingleVerticalData {
         this.date = date;
     }
 
-    public int getEvent_image_club() {
-        return event_image_club;
+    public String getImage_club() {
+        return image_club;
     }
 
-    public void setEvent_image_club(int event_image_club) {
-        this.event_image_club = event_image_club;
+    public void setImage_club(String image_club) {
+        this.image_club = image_club;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getViewcount() {
+        return viewcount;
+    }
+
+    public void setViewcount(String viewcount) {
+        this.viewcount = viewcount;
+    }
+
+    public String getInterested() {
+        return interested;
+    }
+
+    public void setInterested(String interested) {
+        this.interested = interested;
     }
 }

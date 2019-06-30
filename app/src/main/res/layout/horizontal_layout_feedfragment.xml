@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
-    android:layout_height="150dp"
-    android:id="@+id/linearlayout_feedfragment"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="5dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginStart="5dp"
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="270dp"
+    android:layout_margin="5dp"
+    android:background="#FFFFFF"
+    android:elevation="5dp"
     android:orientation="vertical"
-    android:padding="4dp">
+    android:padding="5dp"
+   >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></FrameLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/council_image"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fmc"
+            android:scaleType="fitXY"
+            />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/council_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-
-        />
+    </LinearLayout>
 
 
 
-
-
-</LinearLayout>
-
-
+</androidx.cardview.widget.CardView>

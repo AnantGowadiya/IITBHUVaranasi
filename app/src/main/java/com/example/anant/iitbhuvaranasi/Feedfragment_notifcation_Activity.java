@@ -3,9 +3,8 @@ package com.example.anant.iitbhuvaranasi;
 import android.app.ActivityOptions;
 import android.content.Intent;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.TransitionInflater;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.util.Pair;
@@ -14,13 +13,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class Feedfragment_notifcation_Activity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView image_event;
+    String event_title,event_description,event_date,event_venue,event_time;
     TextView title_event, description_event, date_event, venue_event, time_event, going_count, view_count, interested_count;
     Button go_button, interested_button;
     ImageButton share_button, location_button, clock_button;
@@ -69,16 +68,9 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
             }
         });
 
-      /*
 
         description_event=findViewById(R.id.event_page_description);
-
-        venue_event=findViewById(R.id.event_page_venue);
-        time_event=findViewById(R.id.event_page_time);
-        */
-
-
-    }
+ }
 
     @Override
     public void onClick(View v) {
@@ -92,7 +84,7 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
                         .setData(CalendarContract.Events.CONTENT_URI)
                         .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
                         .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                        .putExtra(CalendarContract.Events.TITLE, "Yoga")
+                        .putExtra(CalendarContract.Events.TITLE,"hke" )
                         .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
                         .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
                         //invitees emails
@@ -125,4 +117,5 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
                 break;
 
         }
-    }}
+    }
+}

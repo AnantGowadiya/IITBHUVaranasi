@@ -2,8 +2,9 @@ package com.example.anant.iitbhuvaranasi;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.RecyclerView;
+//import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import static com.example.anant.iitbhuvaranasi.FeedFragment.getHorizontalData;
+//import static com.example.anant.iitbhuvaranasi.FeedFragment.getHorizontalData;
 
 
 public class HorizontalAdapter_Feedfragment extends RecyclerView.Adapter<HorizontalAdapter_Feedfragment.MyViewHolder> {
@@ -38,11 +40,18 @@ public class HorizontalAdapter_Feedfragment extends RecyclerView.Adapter<Horizon
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Log.d("position",""+position);
+      //  Log.d("position",""+position);
 
         //holder.title.setText(data.get(position).getTitle());
-        holder.image.setImageResource(data.get(position).getImage());
-        if(data==getHorizontalData()){
+       // Log.d("imageurlhorizontal",data.get(position).getImage());
+        Picasso.get()
+                .load(data.get(position).getImage())
+                .placeholder(R.drawable.fmc)
+                .error(R.drawable.amc_workshop)
+                .into(holder.image);
+
+       // Log.d("holderimage",holder.image.toString());
+       /* if(data==getHorizontalData()){
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +71,7 @@ public class HorizontalAdapter_Feedfragment extends RecyclerView.Adapter<Horizon
                     context.startActivity(intent);
                 }
             });
-        }
+        }*/
         //holder.title.setText(data.get(position).getTitle());
         //Picasso.get().load(data.get(position).getImage()).into(holder.images);
         //Toast.makeText(FeedFragment.class, ""+position, Toast.LENGTH_SHORT).show();
@@ -73,20 +82,20 @@ public class HorizontalAdapter_Feedfragment extends RecyclerView.Adapter<Horizon
 
     @Override
     public int getItemCount() {
-        Log.d("getitemcount",""+data.size());
+        //Log.d("getitemcount",""+data.size());
         return data.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
+        //TextView title;
         ImageView image;
-        LinearLayout linearLayout;
+       // LinearLayout linearLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             //title = (TextView) itemView.findViewById(R.id.council_title);
             image = (ImageView) itemView.findViewById(R.id.council_image);
-            linearLayout=itemView.findViewById(R.id.linearlayout_feedfragment);
+            //linearLayout=itemView.findViewById(R.id.linearlayout_feedfragment);
         }
     }
 

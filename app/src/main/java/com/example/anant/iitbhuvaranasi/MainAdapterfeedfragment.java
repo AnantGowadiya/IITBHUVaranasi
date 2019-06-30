@@ -1,23 +1,15 @@
 package com.example.anant.iitbhuvaranasi;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
-import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -27,14 +19,14 @@ import static com.example.anant.iitbhuvaranasi.FeedFragment.getVerticalData;
 
 public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context3;
+    private Context context;
     private ArrayList<Object> items;
     private final int HORIZONTAL = 0;
     private final int VERTICAL = 1;
 
 
-    public MainAdapterfeedfragment(Context context3, ArrayList<Object> items) {
-        this.context3 = context3;
+    public MainAdapterfeedfragment(Context context, ArrayList<Object> items) {
+        this.context = context;
         this.items = items;
     }
 
@@ -43,51 +35,49 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view;
+        RecyclerView.ViewHolder holder;
+        // Toast.makeText(context, "Hello" + viewType, Toast.LENGTH_LONG).show();
 
-            RecyclerView.ViewHolder holder;
-           // Toast.makeText(context, "Hello" + viewType, Toast.LENGTH_LONG).show();
+        switch (viewType) {
+            case VERTICAL:
+                view = inflater.inflate(R.layout.vertical_recycler_feedfragment, parent, false);
+                holder = new VerticalViewHolder(view);
+                break;
 
-            switch (viewType) {
+            case HORIZONTAL:
+                view = inflater.inflate(R.layout.horizontal_recycler_feedfragment, parent, false);
+                holder = new HorizontalViewHolder(view);
+                break;
 
-                case HORIZONTAL:
-                    View view1 = inflater.inflate(R.layout.horizontal_recycler_feedfragment, parent, false);
-                    holder = new HorizontalViewHolder(view1);
-                    break;
-                case VERTICAL:
-                    View view2 = inflater.inflate(R.layout.vertical_recycler_feedfragment, parent, false);
-                    holder = new VerticalViewHolder(view2);
-                    break;
-
-                default:
-                    View view3 = inflater.inflate(R.layout.vertical_recycler_feedfragment, parent, false);
-                    holder = new VerticalViewHolder(view3);
-                    break;
-            }
-
-
-
-            return holder;
+            default:
+                view = inflater.inflate(R.layout.vertical_recycler_feedfragment, parent, false);
+                holder = new VerticalViewHolder(view);
+                break;
         }
+             return holder;
+    }
 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-       // Toast.makeText(context, "Hello"+position, Toast.LENGTH_LONG).show();
-       if(position==0||position==1) {
+        // Toast.makeText(context, "Hello"+position, Toast.LENGTH_LONG).show();
 
-           switch (holder.getItemViewType()) {
-               case HORIZONTAL:
-                   horizontalView((HorizontalViewHolder) holder);
-                   break;
-               case VERTICAL:
-                   verticalView((VerticalViewHolder) holder);
-                   break;
-               default:
-                   verticalView((VerticalViewHolder) holder);
-                   break;
-           }
-       }
+        if (position == 0 || position == 1) {
+
+            switch (holder.getItemViewType()) {
+                case VERTICAL:
+                    verticalView((VerticalViewHolder) holder);
+                    break;
+                case HORIZONTAL:
+                    horizontalView((HorizontalViewHolder) holder);
+                    break;
+                default:
+                    verticalView((VerticalViewHolder) holder);
+                    break;
+            }
+        }
 
 
         /*if (holder.getItemViewType() == HORIZONTAL)
@@ -100,20 +90,27 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
 
     private void horizontalView(HorizontalViewHolder holder) {
         //Toast.makeText(context, "Hello" + holder, Toast.LENGTH_LONG).show();
-        Log.d("holder",""+holder);
-        HorizontalAdapter_Feedfragment adapter = new HorizontalAdapter_Feedfragment(context3,getHorizontalData());
+       // Log.d("holder", "" + holder);
+        Log.d("1000","mainadapterhorizontal0");
+        HorizontalAdapter_Feedfragment adapter = new HorizontalAdapter_Feedfragment(context, getHorizontalData());
+        Log.d("1001","mainadapterhorizontal");
+     // Log.d("horizontaldataadapter",getHorizontalData().toString());
+        //holder.recyclerView.setLayoutManager(new LinearLayoutManager(context3));
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         //holder.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        holder.recyclerView.setLayoutManager(new GridLayoutManager(context3, 2, GridLayoutManager.HORIZONTAL, false));
+       // holder.recyclerView.setLayoutManager(new GridLayoutManager(context3, 2, GridLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(adapter);
         //holder.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, VERTICAL));
-        //holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
     }
 
     private void verticalView(VerticalViewHolder holder) {
-
-        VerticalAdapter_Feedfragment adapter1 = new VerticalAdapter_Feedfragment(context3,getVerticalData());
-        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context3));
-        holder.recyclerView.setAdapter(adapter1);
+        Log.d("1002","mainadaptervertical0");
+        VerticalAdapter_Feedfragment adapter = new VerticalAdapter_Feedfragment(context, getVerticalData);
+       //Log.d("verticaladapter",getVerticalData().toString());
+        Log.d("1003","mainadaptervertical");
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        holder.recyclerView.setAdapter(adapter);
     }
 
 
@@ -126,15 +123,21 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemViewType(int position) {
-        Log.d("getitemviewtypr",""+position);
-        if(position==0) {
+        //Log.d("getitemviewtypr", "" + position);
+        if (items.get(position) instanceof SingleHorizontaldata)
+            return HORIZONTAL;
+       else if (items.get(position) instanceof SingleVerticalData)
+            return VERTICAL;
+        return -1;
+       /* if (position == 0) {
 
-            if (items.get(position) instanceof SingleHorizontaldata)
-                return HORIZONTAL;
+
             if (items.get(position) instanceof SingleVerticalData)
                 return VERTICAL;
+            if (items.get(position) instanceof SingleHorizontaldata)
+                return HORIZONTAL;
         }
-        return -1;
+        return -1;*/
 
         /*switch(position) {
 
@@ -150,7 +153,7 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
                 return VERTICAL;*//*
 
 
-           *//* case 1:
+         *//* case 1:
                 if (items.get(position) instanceof SingleHorizontaldata)
                     return HORIZONTAL;
                 if (items.get(position) instanceof SingleVerticalData)

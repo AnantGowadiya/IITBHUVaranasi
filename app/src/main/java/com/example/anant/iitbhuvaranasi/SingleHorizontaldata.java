@@ -2,24 +2,22 @@ package com.example.anant.iitbhuvaranasi;
 
 public class SingleHorizontaldata{
 
-    private int image;
-    //private String title;
+    private String image;
 
     public SingleHorizontaldata() {
 
     }
 
-    public SingleHorizontaldata(int image) {
+    public SingleHorizontaldata(String image) {
         this.image = image;
-       //this.title = title;
+
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
-
 }
