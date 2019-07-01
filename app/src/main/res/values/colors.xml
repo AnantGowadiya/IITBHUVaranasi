@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#8D467E</color>
+    <color name="colorPrimary">#915E9B</color>
+    <color name="colorPrimaryDark">#40034B</color>
+    <color name="colorAccent">#481452</color>
+    <color name="Black">#0E0D0D</color>
+    <color name="startpurple">#E8CBEE</color>
+    <color name="black">#1A181A</color>
     <color name="feed_background">#536dfe</color>
-    <color name="colorPrimaryDark">#8D467E</color>
-    <color name="colorAccent">#D81B60</color>
     <color name="black_color">#000000</color>
     <color name="white_color">#FFFFFF</color>
 
