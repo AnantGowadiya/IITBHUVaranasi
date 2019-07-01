@@ -16,10 +16,20 @@
             android:id="@+id/nav_complain"
             android:icon="@drawable/ic_complain"
             android:title="Complain" />
+        <item
+            android:id="@+id/nav_myprofile"
+            android:icon="@drawable/ic_complain"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/nav_eidcard"
+            android:icon="@drawable/ic_about"
+            android:title="E-ID Card" />
     </group>
 
     <item android:title="Additional Indo.">
         <menu>
+
+
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_about"

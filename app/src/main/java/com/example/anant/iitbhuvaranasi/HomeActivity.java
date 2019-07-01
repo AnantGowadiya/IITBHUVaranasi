@@ -1,15 +1,17 @@
 package com.example.anant.iitbhuvaranasi;
 
-import androidx.annotation.NonNull;
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
@@ -53,6 +55,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_complain:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ComplainFragment()).commit();
+                break;
+            case R.id.nav_myprofile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new MyProfileFragment()).commit();
+                break;
+            case R.id.nav_eidcard:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new IDCardFragment()).commit();
                 break;
             case R.id.nav_about:
                 Toast.makeText(this, "Info", Toast.LENGTH_SHORT).show();
