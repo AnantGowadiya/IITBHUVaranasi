@@ -2,10 +2,8 @@ package com.example.anant.iitbhuvaranasi;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.util.Pair;
 import android.view.View;
@@ -14,11 +12,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
+
 import java.util.Calendar;
 
 public class Feedfragment_notifcation_Activity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView image_event;
+    String image;
     String event_title,event_description,event_date,event_venue,event_time;
     TextView title_event, description_event, date_event, venue_event, time_event, going_count, view_count, interested_count;
     Button go_button, interested_button;
@@ -51,8 +54,11 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
 
         title_event.setText(getIntent().getStringExtra("title"));
         date_event.setText(getIntent().getStringExtra("date"));
-        image2 = getIntent().getIntExtra("image", 0);
-        image_event.setImageResource(image2);
+        image=getIntent().getStringExtra("image");
+        Glide.with(this)
+                .load(image)
+                .fitCenter() // scale to fit entire image within ImageView
+                .into(image_event);
 
         final Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(image_event, "fullscreen");
@@ -63,7 +69,7 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Full_screen_imageActivity.class);
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Feedfragment_notifcation_Activity.this, pairs);
-                intent.putExtra("image", image2);
+                intent.putExtra("image", image);
                 startActivity(intent, options.toBundle());
             }
         });
