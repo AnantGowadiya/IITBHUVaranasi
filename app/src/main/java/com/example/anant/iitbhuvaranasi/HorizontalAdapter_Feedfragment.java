@@ -1,22 +1,20 @@
 package com.example.anant.iitbhuvaranasi;
 
 import android.content.Context;
-import android.content.Intent;
-import androidx.recyclerview.widget.RecyclerView;
-//import android.util.Log;
-//import android.util.Log;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+//import android.util.Log;
+//import android.util.Log;
 
 //import static com.example.anant.iitbhuvaranasi.FeedFragment.getHorizontalData;
 
@@ -40,7 +38,7 @@ public class HorizontalAdapter_Feedfragment extends RecyclerView.Adapter<Horizon
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-      //  Log.d("position",""+position);
+      Log.d("position"," " +position);
 
         //holder.title.setText(data.get(position).getTitle());
        // Log.d("imageurlhorizontal",data.get(position).getImage());

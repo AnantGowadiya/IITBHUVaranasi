@@ -1,9 +1,8 @@
 package com.example.anant.iitbhuvaranasi;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,6 +51,8 @@ public class ComplainFragment extends Fragment {
     private Uri mImageUri;
     private ImageView image;
     private Button Upload;
+    private String hostel;
+    private String Complainttype;
 
     private static final int PICK_IMAGE_REQUEST=1;
     private AutoCompleteTextView autoCompleteTextView;
@@ -149,6 +150,7 @@ public class ComplainFragment extends Fragment {
 
                                                   } else {
                                                       String item = parent.getItemAtPosition(position).toString();
+                                                      Complainttype = item;
                                                       Toast.makeText(parent.getContext(), item, Toast.LENGTH_SHORT).show();
                                                   }
 
@@ -182,8 +184,9 @@ public class ComplainFragment extends Fragment {
                                                    if (parent.getItemAtPosition(position).equals("Select Hostel ")) {
 
                                                    } else {
-                                                       String item = parent.getItemAtPosition(position).toString();
-                                                       Toast.makeText(parent.getContext(), item, Toast.LENGTH_SHORT).show();
+                                                       String item1 = parent.getItemAtPosition(position).toString();
+                                                       hostel=item1;
+                                                       Toast.makeText(parent.getContext(), item1, Toast.LENGTH_SHORT).show();
                                                    }
 
 
@@ -221,6 +224,13 @@ public class ComplainFragment extends Fragment {
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if ((Complainttype=="Select Type ")){
+                    Toast.makeText(getContext(),"Please fill type of complain",Toast.LENGTH_SHORT).show();}
+                else if(hostel=="Hostels ")
+                    Toast.makeText(getContext(),"Please select hostel",Toast.LENGTH_SHORT).show();
+                else if(auto==null)
+                    Toast.makeText(getContext(),"Please fill message",Toast.LENGTH_SHORT).show();
+                else{
 
 
                 AlertDialog.Builder a_builder = new AlertDialog.Builder(getContext());
@@ -229,42 +239,46 @@ public class ComplainFragment extends Fragment {
                 a_builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        final String message = auto.getText().toString();
+                        final String subject = autoCompleteTextView.getText().toString();
+                        final ProgressDialog pdialog = new ProgressDialog(getContext());
+                        pdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        pdialog.setMessage("Sending Mail....");
+                        pdialog.show();
 
 
 
                         JSONObject postparams = new JSONObject();
 
                         try {
-                            postparams.put("roll", 18085061);
+                            postparams.put("header", subject);
+                            postparams.put("type",Complainttype);
+                            postparams.put("hostel",hostel);
+                            postparams.put("roll",18085061);
+                            postparams.put("complain",message);
+                            postparams.put("anonymous",i);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        try {
-                            postparams.put("complain",message);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            postparams.put("anonymous", i);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+
+
                         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, url, postparams, new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 Log.d("aaaaaaa", "ccccccc ");
+                                pdialog.dismiss();
+                                Toast.makeText(getContext(),"Message sended",Toast.LENGTH_SHORT).show();
                             }
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                //Failure Callback
+                                Toast.makeText(getContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
                             }
                         });
-// Adding the request to the queue along with a unique string tag
                         mrequestqueue.add(jsonObjReq);
                         //AppController.getInstance ().addToRequestQueue ( jsonObjReq, tag_json_obj );
-                        String recipientlist = email;
+                      /*  String recipientlist = email;
                        message = auto.getText().toString();
                         String[] recipients = recipientlist.split(",");
                         String subject = autoCompleteTextView.getText().toString();
@@ -284,7 +298,7 @@ public class ComplainFragment extends Fragment {
                         if (best != null)
                             intent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
                         startActivity(intent);
-
+*/
 
                         // Intent intent = new Intent(Intent.ACTION_SEND);
                         // intent.putExtra(Intent.EXTRA_EMAIL, recipients);
@@ -310,7 +324,7 @@ public class ComplainFragment extends Fragment {
                 AlertDialog alert = a_builder.create();
                 alert.setTitle("Alert!");
                 alert.show();
-            }
+            }}
         });
 return view;
     }

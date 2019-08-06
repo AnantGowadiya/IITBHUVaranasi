@@ -55,6 +55,7 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
 
     @Override
     public void onBindViewHolder(MyViewHolder1 holder, final int position) {
+        Log.d("position209",Integer.toString(position));
 
         // holder.image.setTransitionName("imageTransition");
 

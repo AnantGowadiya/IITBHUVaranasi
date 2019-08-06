@@ -1,20 +1,20 @@
 package com.example.anant.iitbhuvaranasi;
 
 import android.content.Context;
-
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import static com.example.anant.iitbhuvaranasi.FeedFragment.getHorizontalData;
-import static com.example.anant.iitbhuvaranasi.FeedFragment.getVerticalData;
+import static com.example.anant.iitbhuvaranasi.MainActivity.getHorizontalData1;
+import static com.example.anant.iitbhuvaranasi.MainActivity.getVerticalData1;
 
 
 public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -23,6 +23,8 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
     private ArrayList<Object> items;
     private final int HORIZONTAL = 0;
     private final int VERTICAL = 1;
+    SharedPreferences sharedPreferences;
+    Integer i=0;
 
 
     public MainAdapterfeedfragment(Context context, ArrayList<Object> items) {
@@ -38,7 +40,17 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view;
         RecyclerView.ViewHolder holder;
-        // Toast.makeText(context, "Hello" + viewType, Toast.LENGTH_LONG).show();
+        Log.d("0987654",Interestedbutton_class.getNotification_id().toString());
+        if (viewType == -1 && Interestedbutton_class.getNotification_id()!=viewType) {
+            Interestedbutton_class.setNotification_id(viewType);
+            viewType = 0;
+
+        }
+        Log.d("09876545",Interestedbutton_class.getNotification_id().toString());
+
+        Toast.makeText(context, "Hello" + (viewType+4), Toast.LENGTH_LONG).show();
+        Log.d("viewtypemainadapter"," "+ viewType);
+       // viewType = viewType +1;
 
         switch (viewType) {
             case VERTICAL:
@@ -54,6 +66,7 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
             default:
                 view = inflater.inflate(R.layout.vertical_recycler_feedfragment, parent, false);
                 holder = new VerticalViewHolder(view);
+                viewType = viewType +1;
                 break;
         }
              return holder;
@@ -62,11 +75,22 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        // Toast.makeText(context, "Hello"+position, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Hello"+position, Toast.LENGTH_LONG).show();
+        Log.d("positionmainadapter"," "+ position);
 
         if (position == 0 || position == 1) {
+            Log.d("positionmainadapter01"," "+holder.getItemViewType());
+            Log.d("positionmainadapter02"," "+holder.getPosition());
+            Log.d("positionmainadapter03"," "+holder.getLayoutPosition());
+            Log.d("positionmainadapter04"," "+holder.getAdapterPosition());
+            Log.d("positionmainadapter05"," "+holder.getItemId());
+            Log.d("positionmainadapter06"," "+holder.getOldPosition());
 
-            switch (holder.getItemViewType()) {
+            Log.d("098765432",Interestedbutton_class.getNotification_id().toString());
+
+
+            switch (holder.getAdapterPosition()) {
+
                 case VERTICAL:
                     verticalView((VerticalViewHolder) holder);
                     break;
@@ -92,7 +116,7 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
         //Toast.makeText(context, "Hello" + holder, Toast.LENGTH_LONG).show();
        // Log.d("holder", "" + holder);
         Log.d("1000","mainadapterhorizontal0");
-        HorizontalAdapter_Feedfragment adapter = new HorizontalAdapter_Feedfragment(context, getHorizontalData());
+        HorizontalAdapter_Feedfragment adapter = new HorizontalAdapter_Feedfragment(context, getHorizontalData1);
         Log.d("1001","mainadapterhorizontal");
      // Log.d("horizontaldataadapter",getHorizontalData().toString());
         //holder.recyclerView.setLayoutManager(new LinearLayoutManager(context3));
@@ -106,7 +130,7 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
 
     private void verticalView(VerticalViewHolder holder) {
         Log.d("1002","mainadaptervertical0");
-        VerticalAdapter_Feedfragment adapter = new VerticalAdapter_Feedfragment(context, getVerticalData);
+        VerticalAdapter_Feedfragment adapter = new VerticalAdapter_Feedfragment(context, getVerticalData1);
        //Log.d("verticaladapter",getVerticalData().toString());
         Log.d("1003","mainadaptervertical");
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -123,12 +147,14 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemViewType(int position) {
+        Log.d("position300",Integer.toString(position));
         //Log.d("getitemviewtypr", "" + position);
         if (items.get(position) instanceof SingleHorizontaldata)
             return HORIZONTAL;
        else if (items.get(position) instanceof SingleVerticalData)
             return VERTICAL;
-        return -1;
+       return -1;
+
        /* if (position == 0) {
 
 
