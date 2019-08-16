@@ -9,17 +9,18 @@
         android:name="app.AppController"
         android:allowBackup="true"
         android:icon="@drawable/logo_iitbhu"
-        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".EditProfileActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Club_ProfilePage"></activity>
+        <activity android:name=".Club_Feed" />
+        <activity android:name=".EditProfileActivity" />
         <activity android:name=".SignInActivity" />
-         <activity android:name=".Full_screen_imageActivity" />
+        <activity android:name=".Full_screen_imageActivity" />
         <activity android:name=".Clubs_group" />
-        <activity android:name=".Feedfragment_notifcation_Activity" />
-        <!-- <activity android:name=".ClubFeed"></activity> -->
+        <activity android:name=".Feedfragment_notifcation_Activity" /> <!-- <activity android:name=".ClubFeed"></activity> -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

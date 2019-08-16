@@ -4,35 +4,22 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.provider.CalendarContract;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Calendar;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 //import android.util.Log;
 
@@ -64,25 +51,25 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
         // Log.d("imageurlvertical",data.get(position).getImage());
         // Log.d("imageurlvertical2",data.get(position).getImage_club());
         holder.title.setText(data.get(position).getTitle());
-        holder.club.setText(data.get(position).getClub());
+      //  holder.club.setText(data.get(position).getClub());
         holder.date.setText(data.get(position).getDate());
         // Log.d("date",data.get(position).getDate());
         // Log.d("holderimage2",holder.image.toString());
 
-        holder.viewcount.setText(data.get(position).getViewcount());
-        holder.interestedcount.setText(data.get(position).getInterested());
+       // holder.viewcount.setText(data.get(position).getViewcount());
+       // holder.interestedcount.setText(data.get(position).getInterested());
         Glide.with(mcontext)
                 .load(data.get(position).getImage())
                 .placeholder(R.drawable.sntc)
                 .error(R.drawable.amc_workshop)
                 .fitCenter() // scale to fit entire image within ImageView
                 .into(holder.image);
-        Glide.with(mcontext)
+       /* Glide.with(mcontext)
                 .load(data.get(position).getImage_club())
                 .placeholder(R.drawable.sntc)
                 .error(R.drawable.amc_workshop)
                 .fitCenter() // scale to fit entire image within ImageView
-                .into(holder.image_club);
+                .into(holder.image_club);*/
 
 
         //  Picasso.with(mcontext).load(data.get(position).getImage()).fit().centerInside().into(holder.image);
@@ -104,7 +91,7 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
 
         //final Pair<View, String> pair1 = Pair.create((View) holder.image, holder.image.getTransitionName());
 
-        holder.interestedButton.setOnClickListener(new View.OnClickListener() {
+      /*  holder.interestedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mRequestQueue = Volley.newRequestQueue(mcontext);
@@ -135,8 +122,8 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
                 });
                 mRequestQueue.add(jsonObjectRequest);
             }
-        });
-        holder.title.setOnClickListener(new View.OnClickListener() {
+        });*/
+        holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(mcontext,Feedfragment_notifcation_Activity.class);
@@ -148,7 +135,7 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
                         mcontext.startActivity(intent,options.toBundle());
             }
         });
-        holder.shareEvent.setOnClickListener(new View.OnClickListener() {
+     /*   holder.shareEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -192,7 +179,7 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
                 Intent mapintent = new Intent(android.content.Intent.ACTION_VIEW, uri);
                 mcontext.startActivity(mapintent);
             }
-        });
+        });*/
     }
 
 
@@ -203,30 +190,32 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
     }
 
     public class MyViewHolder1 extends RecyclerView.ViewHolder {
-        ImageView image, image_club;
-        TextView title, date, club, viewcount,goingCount, interestedcount;
-        CardView cardView;
-        ImageButton shareEvent, setReminder, mapLocation;
-        Button goButton, interestedButton;
+        CircleImageView image;
+        TextView title, date /*club, viewcount,goingCount, interestedcount*/;
+       // CardView cardView;
+        LinearLayout layout;
+       // ImageButton shareEvent, setReminder, mapLocation;
+       // Button goButton, interestedButton;
 
         public MyViewHolder1(View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.event_image);
-            title = (TextView) itemView.findViewById(R.id.event_title);
-            club = (TextView) itemView.findViewById(R.id.event_title_club);
-            interestedcount = (TextView) itemView.findViewById(R.id.event_interested);
-            date = (TextView) itemView.findViewById(R.id.event_dates);
-            image_club = (ImageView) itemView.findViewById(R.id.event_image_club);
-            viewcount=(TextView) itemView.findViewById(R.id.event_view_count);
+            image =  itemView.findViewById(R.id.event_image1);
+            title = (TextView) itemView.findViewById(R.id.event_title1);
+            layout = itemView.findViewById(R.id.layoutfeed);
+           // club = (TextView) itemView.findViewById(R.id.event_title_club);
+           // interestedcount = (TextView) itemView.findViewById(R.id.event_interested);
+            date = (TextView) itemView.findViewById(R.id.event_dates1);
+          //  image_club = (ImageView) itemView.findViewById(R.id.event_image_club);
+         //   viewcount=(TextView) itemView.findViewById(R.id.event_view_count);
 
-            cardView=itemView.findViewById(R.id.cardview_feedfragment);
-            shareEvent = (ImageButton) itemView.findViewById(R.id.share_event_button);
+         //   cardView=itemView.findViewById(R.id.cardview_feedfragment);
+           /* shareEvent = (ImageButton) itemView.findViewById(R.id.share_event_button);
             setReminder = (ImageButton) itemView.findViewById(R.id.calendar_setevent);
             mapLocation = (ImageButton) itemView.findViewById(R.id.navigate_button);
             goButton = (Button) itemView.findViewById(R.id.button_going);
             interestedButton = (Button) itemView.findViewById(R.id.button_interested);
             goingCount = (TextView) itemView.findViewById(R.id.count_going);
-             }
+           */  }
     }
 
 

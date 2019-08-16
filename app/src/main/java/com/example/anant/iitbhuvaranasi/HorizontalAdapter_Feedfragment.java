@@ -1,6 +1,7 @@
 package com.example.anant.iitbhuvaranasi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,11 +45,20 @@ public class HorizontalAdapter_Feedfragment extends RecyclerView.Adapter<Horizon
        // Log.d("imageurlhorizontal",data.get(position).getImage());
         Picasso.get()
                 .load(data.get(position).getImage())
-                .placeholder(R.drawable.fmc)
+                .placeholder(R.drawable.ic_eye_view)
                 .error(R.drawable.amc_workshop)
                 .into(holder.image);
 
        // Log.d("holderimage",holder.image.toString());
+
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Clubs_group.class);
+                intent.putExtra("position",position);
+                context.startActivity(intent);
+            }
+        });
        /* if(data==getHorizontalData()){
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

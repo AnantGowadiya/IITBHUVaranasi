@@ -1,6 +1,8 @@
 package com.example.anant.iitbhuvaranasi;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     VideoView videoView;
+    SharedPreferences sharedpreferences;
     private static RequestQueue mRequestQueue;
     public static ArrayList<SingleVerticalData> getVerticalData1 = new ArrayList<>();
     public static ArrayList<SingleHorizontaldata>getHorizontalData1=new ArrayList<>();
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Volley
          */
+        sharedpreferences = getSharedPreferences("dataourTeam", Context.MODE_PRIVATE);
+
         setContentView(R.layout.activity_main);
         mRequestQueue = Volley.newRequestQueue(this);
         String url = "http://iitbhuapp.tk/feedandclubs";
@@ -52,9 +57,20 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                String response1 = response.toString();
+                editor.putString("response", response1);
+                editor.commit();
+
+
+
                 Log.d("Response00", response.toString());
 
                 try {
@@ -80,8 +96,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                        for (int i = 0; i < jsonArray.length(); i++) {
+                        for (int i = jsonArray.length() - 1; i > 0; i--) {
                             JSONObject hit = jsonArray.getJSONObject(i);
+
+                            // store in share opref hit.toString()
+                            // update last post number
+                            // read shared pref and add vertical ddata section
 
 
                             String club=hit.getString("club");
@@ -138,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                startActivity(new Intent(MainActivity.this,SignInActivity.class));
                 finish();
             }
         });

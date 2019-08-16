@@ -41,14 +41,10 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
         View view;
         RecyclerView.ViewHolder holder;
         Log.d("0987654",Interestedbutton_class.getNotification_id().toString());
-        if (viewType == -1 && Interestedbutton_class.getNotification_id()!=viewType) {
-            Interestedbutton_class.setNotification_id(viewType);
-            viewType = 0;
 
-        }
         Log.d("09876545",Interestedbutton_class.getNotification_id().toString());
 
-        Toast.makeText(context, "Hello" + (viewType+4), Toast.LENGTH_LONG).show();
+       // Toast.makeText(context, "Hello" + (viewType+4), Toast.LENGTH_LONG).show();
         Log.d("viewtypemainadapter"," "+ viewType);
        // viewType = viewType +1;
 
@@ -147,13 +143,12 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemViewType(int position) {
-        Log.d("position300",Integer.toString(position));
-        //Log.d("getitemviewtypr", "" + position);
-        if (items.get(position) instanceof SingleHorizontaldata)
-            return HORIZONTAL;
-       else if (items.get(position) instanceof SingleVerticalData)
-            return VERTICAL;
-       return -1;
+        return position;
+//        if (items.get(position) instanceof SingleHorizontaldata)
+//            return HORIZONTAL;
+//       else if (items.get(position) instanceof SingleVerticalData)
+//            return VERTICAL;
+//       return -1;
 
        /* if (position == 0) {
 

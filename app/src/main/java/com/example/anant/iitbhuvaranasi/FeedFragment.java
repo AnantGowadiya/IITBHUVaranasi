@@ -1,5 +1,7 @@
 package com.example.anant.iitbhuvaranasi;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -25,8 +30,9 @@ import static com.example.anant.iitbhuvaranasi.MainActivity.getVerticalData1;
 public class FeedFragment extends Fragment {
     private ArrayList<Object> objects = new ArrayList<>();
    // public static Integer i=0;
-
+   SharedPreferences sharedpreferences;
     private RecyclerView mRecyclerView;
+
 
 
     @Nullable
@@ -40,6 +46,7 @@ public class FeedFragment extends Fragment {
 
 
 
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
        // mRecyclerView.setRecycledViewPool(sharedPool);
 
@@ -47,6 +54,17 @@ public class FeedFragment extends Fragment {
         Log.d("fe",getHorizontalData1.toString());
 
         mRecyclerView.setHasFixedSize(true);
+
+        String url = "http://iitbhuapp.tk/feedandclubs";
+        sharedpreferences = this.getActivity().getSharedPreferences("dataourTeam", Context.MODE_PRIVATE);
+        String response = sharedpreferences.getString("response", null);
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            int status = jsonObject.getInt("status");
+            Log.d("status001", Integer.toString(status));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         Log.d("beforemainadapter","009");
         MainAdapterfeedfragment adapter = new MainAdapterfeedfragment(getActivity(), getObject());
