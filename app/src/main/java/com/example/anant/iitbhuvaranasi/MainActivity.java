@@ -96,13 +96,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                        for (int i = jsonArray.length() - 1; i > 0; i--) {
+                        for (int i = jsonArray.length() - 1; i >= 0; i--) {
                             JSONObject hit = jsonArray.getJSONObject(i);
 
                             // store in share opref hit.toString()
                             // update last post number
                             // read shared pref and add vertical ddata section
-
 
                             String club=hit.getString("club");
                             String title=hit.getString("title");
