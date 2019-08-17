@@ -49,5 +49,6 @@ dependencies {
     implementation 'eu.davidea:flexible-adapter-livedata:1.0.0-b3'
     // From 1.0.0-b3, library is compiled with data binding v2
     implementation 'eu.davidea:flexible-adapter-databinding:1.0.0'
+    implementation 'eu.davidea:flipview:1.2.0'
 
 }

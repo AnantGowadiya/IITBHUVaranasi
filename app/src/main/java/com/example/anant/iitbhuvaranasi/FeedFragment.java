@@ -74,6 +74,7 @@ public class FeedFragment extends Fragment {
        // adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         return view;
     }
 

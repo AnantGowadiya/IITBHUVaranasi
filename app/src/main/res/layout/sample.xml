@@ -1,0 +1,191 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+             android:layout_width="match_parent"
+            android:layout_height="?android:attr/listPreferredItemHeightSmall">
+
+            <RelativeLayout
+                android:id="@+id/front_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+
+                <eu.davidea.flipview.FlipView
+                    android:id="@+id/instagram_account_image"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:clickable="false"
+                    app:enableInitialAnimation="false"
+                    app:frontBackgroundColor="@color/colorPrimary_light"
+                    app:frontImage="@drawable/ic_account_circle_white_24dp"/>
+
+                <LinearLayout
+                    android:id="@+id/title_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/instagram_account_image"
+                    android:layout_toRightOf="@id/instagram_account_image"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/instagram_account_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textColor="?primaryTextSelector"
+                       android:text="Title"/>
+
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/event_image"
+                android:layout_height="280dp"
+                android:adjustViewBounds="true"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sntc"
+                android:transitionName="fullscreen"
+                />
+
+
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_feedfragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            app:cardBackgroundColor="@color/feed_background"
+            app:contentPadding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/event_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:text="Date"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        android:transitionName="feedtitle" />
+
+                    <eu.davidea.flipview.FlipView
+                        android:id="@+id/instagram_image_like"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:clickable="true"
+                        android:inAnimation="@anim/scale_up"
+                        android:outAnimation="@anim/scale_down"
+                        app:animationDuration="300"
+                        app:checked="false"
+                        app:enableInitialAnimation="true"
+                        app:frontBackgroundColor="@android:color/transparent"
+                        app:frontImage="@drawable/ic_favorite_border_grey_600_24dp"
+                        app:rearBackgroundColor="@android:color/transparent"
+                        app:rearImage="@drawable/ic_favorite_red700_24dp"
+                        app:rearImageAnimationDelay="100"
+                        app:rearImageAnimationDuration="200"/>
+
+                    <ImageView
+                        android:id="@+id/instagram_image_share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_share_grey600_24dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/event_dates"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:text="Venue"
+                        android:textColorLink="@color/white_color"
+                        android:textSize="16sp"
+                        android:transitionName="feed_date" />
+
+
+                    <ImageButton
+                        android:id="@+id/calendar_setevent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Share Event"
+                        android:src="@drawable/ic_access_time_black_24dp"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

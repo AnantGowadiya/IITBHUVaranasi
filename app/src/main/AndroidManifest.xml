@@ -20,7 +20,7 @@
         <activity android:name=".SignInActivity" />
         <activity android:name=".Full_screen_imageActivity" />
         <activity android:name=".Clubs_group" />
-        <activity android:name=".Feedfragment_notifcation_Activity" /> <!-- <activity android:name=".ClubFeed"></activity> -->
+        <activity android:name=".Feedfragment_notifcation_Activity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
