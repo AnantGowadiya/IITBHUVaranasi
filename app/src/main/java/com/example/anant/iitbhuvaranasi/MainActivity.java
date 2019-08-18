@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Volley
          */
-        sharedpreferences = getSharedPreferences("dataourTeam", Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
 
         setContentView(R.layout.activity_main);
         mRequestQueue = Volley.newRequestQueue(this);
@@ -103,23 +103,30 @@ public class MainActivity extends AppCompatActivity {
                             // update last post number
                             // read shared pref and add vertical ddata section
 
-                            String club=hit.getString("club");
-                            String title=hit.getString("title");
-                            String date=hit.getString("datetime");
-                            Integer notification_id=hit.getInt("notifid");
-                            Interestedbutton_class.notification_id=notification_id;
-                            String image_club="http://iitbhuapp.tk"+hit.getString("clubimage");
-                            String image="http://iitbhuapp.tk"+hit.getString("image");
+                            String club_name=hit.getString("club");
+                            String club_image="http://iitbhuapp.tk"+hit.getString("clubimage");
+                            String council_name=hit.getString("council");
+                            String council_image="http://iitbhuapp.tk"+hit.getString("councilimage");
+                            String title_event=hit.getString("title");
+                            String description_event=hit.getString("description");
+                            String image_event="http://iitbhuapp.tk"+hit.getString("image");
+                            String date_event=hit.getString("datetime");
+                            String location=hit.getString("location");
+
                             Integer viewcount1=hit.getInt("viewedcount");
+                            String viewcount=viewcount1.toString();
                             Integer interested1=hit.getInt("interestedcount");
+                            String interestedcount=interested1.toString();
+                            String interested=hit.getInt("interested") + "";
+                            Integer notification_id=hit.getInt("notifid");
                             Integer notif_id=hit.getInt("notifid");
                             String notifid=notif_id.toString();
-                            String viewcount=viewcount1.toString();
-                            String interested=interested1.toString();
-                            getVerticalData1.add(new SingleVerticalData(club,title,date,image_club, image,viewcount,interested,notifid));
+                            Interestedbutton_class.notification_id=notification_id;
+                            getVerticalData1.add(new SingleVerticalData(club_name,club_image,council_name,council_image,title_event,description_event
+                                    ,image_event,date_event,location,viewcount,interestedcount,interested,notifid));
                             Log.d("verticalse00",getVerticalData1.toArray().toString());
 
-                            Log.d("imageurl00", image);
+                           // Log.d("imageurl00", image);
                             Log.d("verticaldataori00",getVerticalData1.toString());
 
                         }

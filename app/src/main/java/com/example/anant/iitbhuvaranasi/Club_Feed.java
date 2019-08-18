@@ -78,20 +78,20 @@ public class Club_Feed extends AppCompatActivity {
 
         for(int a=getVerticalData1.size()-1;a>=0;a--) {
 
-            if (getVerticalData1.get(a).getClub().equals(title1)){
+            if (getVerticalData1.get(a).getClub_name().equals(title1)){
                 getVerticalData3.add(getVerticalData1.get(a));
                 Log.d("567854", getVerticalData3.toString());
-                Log.d("567853", getVerticalData1.get(a).getClub().toString());
+                Log.d("567853", getVerticalData1.get(a).getClub_name().toString());
 
             }
 
-            Log.d("5678", getVerticalData1.get(a).getClub().toString());
+            Log.d("5678", getVerticalData1.get(a).getClub_name().toString());
         }
 
         RecyclerView = findViewById(R.id.cub_feed_recyclerview);
         RecyclerView.setHasFixedSize(true);
         RecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        Adapter_CLubFeed adapter_cLubFeed = new Adapter_CLubFeed(getVerticalData3,getApplicationContext());
+        Adapter_CLubFeed adapter_cLubFeed = new Adapter_CLubFeed(getVerticalData3,Club_Feed.this);
         RecyclerView.setAdapter(adapter_cLubFeed);
         Log.d("vetricalfer",getVerticalData1.toString());
     }

@@ -9,17 +9,22 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.google.gson.Gson;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.Date;
 
 //import android.util.Log;
 
@@ -41,8 +46,9 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder1 holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder1 holder, final int position) {
         Log.d("position209",Integer.toString(position));
+        final LayoutInflater inflater = LayoutInflater.from(mcontext);
 
         // holder.image.setTransitionName("imageTransition");
 
@@ -50,16 +56,29 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
         //holder.image_club.setImageResource(data.get(position).getEvent_image_club());
         // Log.d("imageurlvertical",data.get(position).getImage());
         // Log.d("imageurlvertical2",data.get(position).getImage_club());
-        holder.title.setText(data.get(position).getTitle());
+        holder.title.setText(data.get(position).getTitle_event());
       //  holder.club.setText(data.get(position).getClub());
-        holder.date.setText(data.get(position).getDate());
+        String originalString = data.get(position).getDate_event();
+        String original = originalString.replace("T"," ");
+        String original1 = original.replace("Z","");
+        Log.d("67899",original1.toString());
+        Date date2 = null;
+        try {
+            date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(original1);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        final String newString = new SimpleDateFormat("E, dd MMM yyyy hh:mm a").format(date2);
+        holder.date.setText(newString);
         // Log.d("date",data.get(position).getDate());
         // Log.d("holderimage2",holder.image.toString());
 
        // holder.viewcount.setText(data.get(position).getViewcount());
        // holder.interestedcount.setText(data.get(position).getInterested());
         Glide.with(mcontext)
-                .load(data.get(position).getImage())
+                .load(data.get(position).getImage_event())
                 .placeholder(R.drawable.sntc)
                 .error(R.drawable.amc_workshop)
                 .fitCenter() // scale to fit entire image within ImageView
@@ -79,13 +98,29 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
         pairs[0] = new Pair<View, String>(holder.image, "fullscreen");
         pairs[1] = new Pair<View, String>(holder.title, "feedtitle");
         pairs[2] = new Pair<View, String>(holder.date, "feed_date");
+
+
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mcontext, Full_screen_imageActivity.class);
+               /* Intent intent = new Intent(mcontext, Full_screen_imageActivity.class);
                 ActivityOptions options1 = ActivityOptions.makeSceneTransitionAnimation((Activity) mcontext, pairs);
-                intent.putExtra("image", data.get(position).getImage());
-                mcontext.startActivity(intent, options1.toBundle());
+                intent.putExtra("image", data.get(position).getImage_event());
+                mcontext.startActivity(intent, options1.toBundle());*/
+
+
+
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(mcontext);
+                View mView = inflater.inflate(R.layout.dialog_custom_layout_image, null);
+                PhotoView photoView = mView.findViewById(R.id.imageView);
+                Glide.with(mcontext)
+                        .load(data.get(position).getImage_event())
+                        .error(R.drawable.amc_workshop)
+                        .fitCenter() // scale to fit entire image within ImageView
+                        .into(photoView);
+                mBuilder.setView(mView);
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
             }
         });
 
@@ -129,9 +164,13 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
                 Intent intent=new Intent(mcontext,Feedfragment_notifcation_Activity.class);
                 ActivityOptions options= ActivityOptions.makeSceneTransitionAnimation((Activity) mcontext, pairs);
                 // ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mcontext, pair1);
-                intent.putExtra("title",data.get(position).getTitle());
-                intent.putExtra("date",data.get(position).getDate());
-                intent.putExtra("image",data.get(position).getImage());
+                Gson gson = new Gson();
+                String json = gson.toJson(data.get(position));
+                 intent.putExtra("all",json);
+                intent.putExtra("time",newString);
+                intent.putExtra("title",data.get(position).getTitle_event());
+                intent.putExtra("date",data.get(position).getDate_event());
+                intent.putExtra("image",data.get(position).getImage_event());
                         mcontext.startActivity(intent,options.toBundle());
             }
         });
@@ -190,7 +229,7 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
     }
 
     public class MyViewHolder1 extends RecyclerView.ViewHolder {
-        CircleImageView image;
+        ImageView image;
         TextView title, date /*club, viewcount,goingCount, interestedcount*/;
        // CardView cardView;
         LinearLayout layout;

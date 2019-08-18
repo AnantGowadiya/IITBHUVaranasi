@@ -20,9 +20,17 @@ public class Full_screen_imageActivity extends AppCompatActivity {
 
         full_image=findViewById(R.id.fullscree_nmageView);
        image=getIntent().getStringExtra("image");
-        Glide.with(this)
-                .load(image)
-                .fitCenter() // scale to fit entire image within ImageView
-                .into(full_image);
+       if (image != null) {
+           Glide.with(this)
+                   .load(image)
+                   .fitCenter() // scale to fit entire image within ImageView
+                   .into(full_image);
+       }
+       else {
+           full_image.setImageResource(R.drawable.map_iitbhu);
+       }
+
     }
+
+
 }
