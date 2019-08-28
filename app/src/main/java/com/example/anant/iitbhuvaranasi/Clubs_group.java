@@ -1,6 +1,5 @@
 package com.example.anant.iitbhuvaranasi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 
 public class Clubs_group extends AppCompatActivity {
 
-    SharedPreferences sharedpreferences;
     RecyclerView RecyclerView;
     private ArrayList<CLubFeedData> mExampleList;
     Integer position;
@@ -35,7 +33,6 @@ public class Clubs_group extends AppCompatActivity {
         Log.d("whyuio","" + position);
 
         mExampleList = new ArrayList<>();
-
         RecyclerView = findViewById(R.id.recyclerView_clubs);
         RecyclerView.setHasFixedSize(true);
         //RecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -44,11 +41,17 @@ public class Clubs_group extends AppCompatActivity {
         androidx.recyclerview.widget.RecyclerView.VERTICAL,
         false));
 
+        Api_Response.method(this);
 
-        sharedpreferences = getSharedPreferences("dataourTeam", Context.MODE_PRIVATE);
-        String response = sharedpreferences.getString("response", null);
+        SharedPreferences pref2 =  getApplicationContext().getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
+        String response45678 = pref2.getString(Constants.Response_Feed_Old, "2");
+        Log.d("response34567890123",response45678);
+
+
+
+
         try {
-            JSONObject jsonObject = new JSONObject(response);
+            JSONObject jsonObject = new JSONObject(response45678);
             int status = jsonObject.getInt("status");
             JSONArray allcouncils= jsonObject.getJSONArray("councils");
             JSONObject council = allcouncils.getJSONObject(position);

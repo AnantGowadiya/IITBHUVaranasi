@@ -31,7 +31,7 @@ import org.json.JSONObject;
 import app.AppController;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-class MyProfileFragment extends Fragment {
+public class MyProfileFragment extends Fragment {
 
     private EditText Name,Rollno,Department,Email,Contact;
     private CircleImageView imageView;

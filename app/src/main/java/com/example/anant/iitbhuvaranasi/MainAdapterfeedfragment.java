@@ -6,15 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import static com.example.anant.iitbhuvaranasi.MainActivity.getHorizontalData1;
-import static com.example.anant.iitbhuvaranasi.MainActivity.getVerticalData1;
+import static com.example.anant.iitbhuvaranasi.FeedFragment.getHorizontalData1;
+import static com.example.anant.iitbhuvaranasi.FeedFragment.getVerticalData5;
 
 
 public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -71,7 +70,7 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Toast.makeText(context, "Hello"+position, Toast.LENGTH_LONG).show();
+       /* Toast.makeText(context, "Hello"+position, Toast.LENGTH_LONG).show();*/
         Log.d("positionmainadapter"," "+ position);
 
         if (position == 0 || position == 1) {
@@ -126,7 +125,7 @@ public class MainAdapterfeedfragment extends RecyclerView.Adapter<RecyclerView.V
 
     private void verticalView(VerticalViewHolder holder) {
         Log.d("1002","mainadaptervertical0");
-        VerticalAdapter_Feedfragment adapter = new VerticalAdapter_Feedfragment(context, getVerticalData1);
+        VerticalAdapter_Feedfragment adapter = new VerticalAdapter_Feedfragment(context, getVerticalData5);
        //Log.d("verticaladapter",getVerticalData().toString());
         Log.d("1003","mainadaptervertical");
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));

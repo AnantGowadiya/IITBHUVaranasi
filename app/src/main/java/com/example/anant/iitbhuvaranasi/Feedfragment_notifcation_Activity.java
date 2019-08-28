@@ -1,5 +1,8 @@
 package com.example.anant.iitbhuvaranasi;
 
+import android.animation.Animator;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,11 +19,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.github.chrisbanes.photoview.PhotoView;
 import com.google.gson.Gson;
 
 import java.text.DateFormat;
@@ -31,14 +32,19 @@ import java.util.Date;
 
 public class Feedfragment_notifcation_Activity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView image_event;
+    ImageView image_event,image_eventfullscreen;
     String image,time;
     String event_title,event_description,event_date,event_venue,event_time;
-    TextView title_event, description_event, date_event, venue_event, time_event, going_count, view_count, interested_count;
-    Button go_button, interested_button;
+    TextView title_event, description_event, date_event, venue_event, time_event, interested_count;
+    Button  interested_button;
     ImageButton share_button, location_button, clock_button;
     SingleVerticalData obj;
+    private Animator currentAnimator;
+    private int shortAnimationDuration;
+    SharedPreferences sharedpreferences;
+    View thumb1View;
     int image2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +52,14 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
         setContentView(R.layout.activity_feedfragment_notifcation_);
 
         time=getIntent().getStringExtra("time");
+        Log.d("morethanyouknow",time);
 
         String json=getIntent().getStringExtra("all");
         Gson gson = new Gson();
         obj = gson.fromJson(json, SingleVerticalData.class);
         Log.d("poiuy",obj.getClub_name());
+
+        thumb1View = findViewById(R.id.event_picture_2);
 
         title_event = findViewById(R.id.event_page_title);
         date_event = findViewById(R.id.event_page_date);
@@ -64,13 +73,13 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
         time_event = (TextView) findViewById(R.id.event_time);
         clock_button = (ImageButton) findViewById(R.id.clock);
         clock_button.setOnClickListener(this);
-        go_button = (Button) findViewById(R.id.going_button);
-        go_button.setOnClickListener(this);
+      //  go_button = (Button) findViewById(R.id.going_button);
+    //    go_button.setOnClickListener(this);
         interested_button = (Button) findViewById(R.id.interested_button);
         interested_button.setOnClickListener(this);
-        going_count = (TextView) findViewById(R.id.going_count);
+    //    going_count = (TextView) findViewById(R.id.going_count);
         interested_count = (TextView) findViewById(R.id.interested_count);
-        view_count = (TextView) findViewById(R.id.view_count);
+    //    view_count = (TextView) findViewById(R.id.view_count);
        // title_event.setText(getIntent().getStringExtra("title"));
       //  date_event.setText(getIntent().getStringExtra("date"));
       //  image=getIntent().getStringExtra("image");
@@ -83,8 +92,9 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
                 .into(image_event);
         date_event.setText(time);
         venue_event.setText(obj.getLocation());
-        view_count.setText(obj.getViewcount());
+       // view_count.setText(obj.getViewcount());
         interested_count.setText(obj.getInterestedcount());
+
 
 
 
@@ -94,11 +104,18 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
         final Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(image_event, "fullscreen");
 
-        final LayoutInflater inflater = LayoutInflater.from(this);
+
         image_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder mBuilder1 = new AlertDialog.Builder(Feedfragment_notifcation_Activity.this);
+                final Pair[] pairs = new Pair[1];
+                pairs[0] = new Pair<View, String>(image_event, "fullscreen");
+                Intent intent = new Intent(Feedfragment_notifcation_Activity.this, Full_screen_imageActivity.class);
+                ActivityOptions options1 = ActivityOptions.makeSceneTransitionAnimation((Activity) Feedfragment_notifcation_Activity.this, pairs);
+                intent.putExtra("image", obj.getImage_event());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent,options1.toBundle());
+             /*   AlertDialog.Builder mBuilder1 = new AlertDialog.Builder(Feedfragment_notifcation_Activity.this);
                 View View =inflater.inflate(R.layout.dialog_custom_layout_image1, null);
                 PhotoView photoView1 = View.findViewById(R.id.imageView2);
                 Glide.with(Feedfragment_notifcation_Activity.this)
@@ -108,7 +125,17 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
                         .into(photoView1);
                 mBuilder1.setView(View);
                 AlertDialog mDialog = mBuilder1.create();
-                mDialog.show();
+                mDialog.show();*/
+            /*    LayoutInflater inflater = LayoutInflater
+                        .from(getApplicationContext());
+                View view = inflater.inflate(R.layout.activity_full_screen_image, null);
+                image_eventfullscreen= findViewById(R.id.fullscree_nmageView);
+
+
+                layoutToAdd.addView(view);
+         *//*       Picasso.get()
+                        .load(obj.getImage_event())
+                        .into(image_eventfullscreen);*/
             }
         });
 
@@ -121,8 +148,10 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.clock:
-                addEventToCalender(obj.getTitle_event(),obj.getDescription_event(),
-                        obj.getLocation(),time);
+                Log.d("morethanyou",time);
+                addEventToCalender(obj.getTitle_event().toString(),obj.getDescription_event(),
+                        obj.getLocation(),time.toString());
+                break;
             /*    Calendar beginTime = Calendar.getInstance();
                 beginTime.set(2012, 0, 19, 7, 30);
                 Calendar endTime = Calendar.getInstance();
@@ -137,7 +166,7 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
                         //invitees emails
                         .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
                 startActivity(intent);*/
-                break;
+
 
             case R.id.share_event_button:
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
@@ -151,9 +180,9 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));
                 break;
 
-            case R.id.going_button:
+            /*case R.id.going_button:
 
-                break;
+                break;*/
 
             case R.id.interested_button:
 
@@ -210,7 +239,7 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
 
     public void createAddToCalendarIntent(String title,String description,String location,String time) {
 
-        DateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy hh:mm a");
+        DateFormat formatter = new SimpleDateFormat("E, dd MMM  hh:mm a");
         long lnsTime = 0, lneTime = 0;
         Date dateObject = null;
         try {

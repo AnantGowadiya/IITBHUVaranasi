@@ -76,7 +76,7 @@ public class Adapter_CLubFeed extends RecyclerView.Adapter<Adapter_CLubFeed.MyVi
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        final String newString = new SimpleDateFormat("E, dd MMM yyyy hh:mm a").format(date2);
+        final String newString = new SimpleDateFormat("E, dd MMM  hh:mm a").format(date2);
        // String time = new SimpleDateFormat("HH mm ss").format(date2);
           //starttime= Integer.valueOf(time);
 
@@ -120,14 +120,41 @@ public class Adapter_CLubFeed extends RecyclerView.Adapter<Adapter_CLubFeed.MyVi
         pairs[0] = new Pair<View, String>(holder.image, "fullscreen");
         pairs[1] = new Pair<View, String>(holder.title, "feedtitle");
         pairs[2] = new Pair<View, String>(holder.date, "feed_date");
+        holder.date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context1, Feedfragment_notifcation_Activity.class);
+                ActivityOptions options= ActivityOptions.makeSceneTransitionAnimation((Activity) context1, pairs);
+                Gson gson = new Gson();
+                String json = gson.toJson(data.get(position));
+                // ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mcontext, pair1);
+                intent.putExtra("all",json);
+                intent.putExtra("time",newString);
+                intent.putExtra("title", data.get(position).getTitle_event());
+                intent.putExtra("date", data.get(position).getDate_event());
+                intent.putExtra("image", data.get(position).getImage_event());
+                context1.startActivity(intent);
+            }
+        });
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context1, Full_screen_imageActivity.class);
+                Intent intent = new Intent(context1, Feedfragment_notifcation_Activity.class);
+                ActivityOptions options= ActivityOptions.makeSceneTransitionAnimation((Activity) context1, pairs);
+                Gson gson = new Gson();
+                String json = gson.toJson(data.get(position));
+                // ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mcontext, pair1);
+                intent.putExtra("all",json);
+                intent.putExtra("time",newString);
+                intent.putExtra("title", data.get(position).getTitle_event());
+                intent.putExtra("date", data.get(position).getDate_event());
+                intent.putExtra("image", data.get(position).getImage_event());
+                context1.startActivity(intent);
+               /* Intent intent = new Intent(context1, Full_screen_imageActivity.class);
                  ActivityOptions options1 = ActivityOptions.makeSceneTransitionAnimation((Activity) context1, pairs);
                 intent.putExtra("image", data.get(position).getImage_event());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context1.startActivity(intent);
+                context1.startActivity(intent);*/
             }
         });
 
@@ -279,7 +306,7 @@ public class Adapter_CLubFeed extends RecyclerView.Adapter<Adapter_CLubFeed.MyVi
 
         public void createAddToCalendarIntent(String title,String description,String location,String time) {
 
-            DateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy hh:mm a");
+            DateFormat formatter = new SimpleDateFormat("E, dd MMM  hh:mm a");
             long lnsTime = 0, lneTime = 0;
             Date dateObject = null;
             try {

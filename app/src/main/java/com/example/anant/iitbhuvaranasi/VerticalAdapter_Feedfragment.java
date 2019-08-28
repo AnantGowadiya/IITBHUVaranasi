@@ -13,12 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.bumptech.glide.Glide;
-import com.github.chrisbanes.photoview.PhotoView;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
@@ -70,7 +68,7 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        final String newString = new SimpleDateFormat("E, dd MMM yyyy hh:mm a").format(date2);
+        final String newString = new SimpleDateFormat("E, dd MMM  hh:mm a").format(date2);
         holder.date.setText(newString);
         // Log.d("date",data.get(position).getDate());
         // Log.d("holderimage2",holder.image.toString());
@@ -110,17 +108,11 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
 
 
 
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(mcontext);
-                View mView = inflater.inflate(R.layout.dialog_custom_layout_image, null);
-                PhotoView photoView = mView.findViewById(R.id.imageView);
-                Glide.with(mcontext)
-                        .load(data.get(position).getImage_event())
-                        .error(R.drawable.amc_workshop)
-                        .fitCenter() // scale to fit entire image within ImageView
-                        .into(photoView);
-                mBuilder.setView(mView);
-                AlertDialog mDialog = mBuilder.create();
-                mDialog.show();
+                Intent intent = new Intent(mcontext, Full_screen_imageActivity.class);
+                ActivityOptions options1 = ActivityOptions.makeSceneTransitionAnimation((Activity) mcontext, pairs);
+                intent.putExtra("image", data.get(position).getImage_event());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mcontext.startActivity(intent,options1.toBundle());
             }
         });
 

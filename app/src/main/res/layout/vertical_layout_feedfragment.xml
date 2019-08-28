@@ -50,7 +50,8 @@
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:textColor="@color/black_color"
-                android:textSize="17sp" />
+                android:textStyle="bold"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/event_dates1"
@@ -59,7 +60,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Subtitle"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textColor="@color/colorGray"/>
 
         </LinearLayout>

@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+    android:id="@+id/layout_inflatein"
         android:background="@android:color/transparent"
         android:orientation="vertical"
         tools:context=".Feedfragment_notifcation_Activity">
@@ -33,7 +34,7 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:id="@+id/event_picture_2"
+                           android:id="@+id/event_picture_2"
                             android:layout_width="match_parent"
                             android:layout_height="300dp"
                             android:adjustViewBounds="true"
@@ -90,8 +91,10 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="9"
                                         android:text="Event Title"
+
+                                        android:textAllCaps="true"
                                         android:textColor="@color/colorWhite"
-                                        android:textSize="21sp"
+                                        android:textSize="25sp"
                                         android:textStyle="bold"
                                         android:transitionName="feedtitle" />
 
@@ -117,7 +120,7 @@
                                         android:layout_height="wrap_content"
                                         android:text="Date"
                                         android:textColor="@color/colorWhite"
-                                        android:textSize="20sp"
+                                        android:textSize="15sp"
                                         android:transitionName="feed_date" />
                                 </LinearLayout>
 
@@ -193,24 +196,6 @@
                             android:weightSum="100">
 
                             <Button
-                                android:id="@+id/going_button"
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="0dp"
-                                android:layout_weight="40"
-                                android:text="GOING"
-                                android:textColor="@color/secondaryTextColor" />
-
-                            <TextView
-                                android:id="@+id/going_count"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_weight="5"
-                                android:gravity="center"
-                                android:text="500" />
-
-                            <Button
                                 android:id="@+id/interested_button"
                                 style="?android:attr/buttonBarButtonStyle"
                                 android:layout_width="0dp"
@@ -249,7 +234,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                   <!-- <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal">
@@ -269,7 +254,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="500" />
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

@@ -97,12 +97,13 @@ public class HorizontalAdapter_Feedfragment extends RecyclerView.Adapter<Horizon
     public class MyViewHolder extends RecyclerView.ViewHolder {
         //TextView title;
         ImageView image;
+
        // LinearLayout linearLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             //title = (TextView) itemView.findViewById(R.id.council_title);
-            image = (ImageView) itemView.findViewById(R.id.council_image);
+            image =  itemView.findViewById(R.id.council_image);
             //linearLayout=itemView.findViewById(R.id.linearlayout_feedfragment);
         }
     }

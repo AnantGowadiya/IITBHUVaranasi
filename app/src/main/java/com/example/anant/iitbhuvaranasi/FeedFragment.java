@@ -1,6 +1,5 @@
 package com.example.anant.iitbhuvaranasi;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,13 +13,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-import static com.example.anant.iitbhuvaranasi.MainActivity.getHorizontalData1;
-import static com.example.anant.iitbhuvaranasi.MainActivity.getVerticalData1;
+import static android.content.Context.MODE_PRIVATE;
 
 //import android.util.Log;
 //import android.util.Log;
@@ -32,6 +34,10 @@ public class FeedFragment extends Fragment {
    // public static Integer i=0;
    SharedPreferences sharedpreferences;
     private RecyclerView mRecyclerView;
+   //public static ArrayList<SingleVerticalData> getVerticalData1 = new ArrayList<>();
+    public static ArrayList<SingleVerticalData> getVerticalData4 = new ArrayList<>();
+    public static ArrayList<SingleVerticalData> getVerticalData5;
+    public static ArrayList<SingleHorizontaldata>getHorizontalData1=new ArrayList<>();
 
 
 
@@ -45,24 +51,133 @@ public class FeedFragment extends Fragment {
 
 
 
+        String apidata = Api_Response.method(this.getActivity());
+        getVerticalData4 = VerticalDataFeed.getVerticalData3(this.getActivity());
+        Log.d("howareyou",getVerticalData4.toString());
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date CurrentTime = null;
+        try {
+            CurrentTime = dateFormat.parse(dateFormat.format(new Date()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        getVerticalData5 = new ArrayList<>();
+        getHorizontalData1=new ArrayList<>();
+
+
+
+         for (int a = 0 ; a< getVerticalData4.size(); a++){
+             String originalString = getVerticalData4.get(a).getDate_event();
+             String original = originalString.replace("T"," ");
+             String original1 = original.replace("Z","");
+
+             Date date2 = null;
+             try {
+                 date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(original1);
+             } catch (ParseException e) {
+                 e.printStackTrace();
+             }
+             final String newString = new SimpleDateFormat("E, dd MMM  hh:mm a").format(date2);
+             if (CurrentTime.before(date2))
+             {
+                 getVerticalData5.add(getVerticalData4.get(a));
+             }
+         }
+Log.d("merakuchnhihonewala",getVerticalData5.toString());
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
        // mRecyclerView.setRecycledViewPool(sharedPool);
 
-        Log.d("fe",getVerticalData1.toString());
+      //
+        //  Log.d("fe",getVerticalData1.toString());
         Log.d("fe",getHorizontalData1.toString());
 
         mRecyclerView.setHasFixedSize(true);
 
+        SharedPreferences pref3 = this.getActivity().getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
+        String resonse_feed = pref3.getString(Constants.Response_Feed_Old,"3");
+
+
+        /*SharedPreferences pref =  this.getActivity().getSharedPreferences("MyPref", 0);
+        String response1 = pref.getString("savehojayaar", "2");
+        Log.d("response3456789",response1.toString());*/
+
         String url = "http://iitbhuapp.tk/feedandclubs";
-        sharedpreferences = this.getActivity().getSharedPreferences("dataourTeam", Context.MODE_PRIVATE);
-        String response = sharedpreferences.getString("response", null);
+        /*SharedPreferences prefs = this.getActivity().getPreferences(MODE_PRIVATE);
+        String response = prefs.getString(Constants.Response_Feed_Old, "2");
+        Log.d("response3456789",response);*/
+
+
+        /**
+         * Fetching Data from sharedpref
+         */
         try {
-            JSONObject jsonObject = new JSONObject(response);
-            int status = jsonObject.getInt("status");
+            JSONObject response = new JSONObject(resonse_feed);
+            int status = response.getInt("status");
             Log.d("status001", Integer.toString(status));
-        } catch (JSONException e) {
+
+            if (status == 1) {
+                Log.d("status100", "1");
+                JSONArray jsonArray = response.getJSONArray("notif");
+                JSONArray array = response.getJSONArray("councils");
+
+
+                for (int j = 0; j < array.length(); j++){
+                    JSONObject hit1 = array.getJSONObject(j);
+                    String image_council = "http://iitbhuapp.tk" + hit1.getString("image");
+                    //  Log.d("clubname", name);
+                    //Log.d("imageurl",image_council);
+
+                    getHorizontalData1.add(new SingleHorizontaldata(image_council));
+                }
+                Log.d("horizontaldata234500", getHorizontalData1.toString());
+
+                /*for (int i = jsonArray.length() - 1; i >= 0; i--) {
+                    JSONObject hit = jsonArray.getJSONObject(i);
+
+                    // store in share opref hit.toString()
+                    // update last post number
+                    // read shared pref and add vertical ddata section
+
+                    String club_name=hit.getString("club");
+                    String club_image="http://iitbhuapp.tk"+hit.getString("clubimage");
+                    String council_name=hit.getString("council");
+                    String council_image="http://iitbhuapp.tk"+hit.getString("councilimage");
+                    String title_event=hit.getString("title");
+                    String description_event=hit.getString("description");
+                    String image_event="http://iitbhuapp.tk"+hit.getString("image");
+                    String date_event=hit.getString("datetime");
+                    String location=hit.getString("location");
+
+                    Integer viewcount1=hit.getInt("viewedcount");
+                    String viewcount=viewcount1.toString();
+                    Integer interested1=hit.getInt("interestedcount");
+                    String interestedcount=interested1.toString();
+                    String interested=hit.getInt("interested") + "";
+                    Integer notification_id=hit.getInt("notifid");
+                    Integer notif_id=hit.getInt("notifid");
+                    String notifid=notif_id.toString();
+                    Interestedbutton_class.notification_id=notification_id;
+                    getVerticalData1.add(new SingleVerticalData(club_name,club_image,council_name,council_image,title_event,description_event
+                            ,image_event,date_event,location,viewcount,interestedcount,interested,notifid));
+                    Log.d("verticalse00",getVerticalData1.toArray().toString());
+
+                    // Log.d("imageurl00", image);
+                    Log.d("verticaldataori00",getVerticalData1.toString());
+
+                }*/
+             //   Log.d("getverticaldata100",getVerticalData1.toString());
+
+
+            }
+            else {
+                Log.d("status000", "0");
+            }
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -70,9 +185,11 @@ public class FeedFragment extends Fragment {
         MainAdapterfeedfragment adapter = new MainAdapterfeedfragment(getActivity(), getObject());
         Log.d("aftermainadapter","009");
         //Log.d("getobjectstart",getObject().toString());
+        mRecyclerView.setHasFixedSize(true);
         adapter.notifyDataSetChanged();
        // adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
@@ -82,7 +199,7 @@ public class FeedFragment extends Fragment {
 
     private ArrayList<Object> getObject() {
         objects.add(getHorizontalData1);
-        objects.add(getVerticalData1);
+        objects.add(getVerticalData5);
 
        // Log.d("horizontalarray234",getHorizontalData1.toString());
         return objects;
