@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
     android:id="@+id/layout_inflatein"
-        android:background="@android:color/transparent"
+        android:background="@color/white_color"
         android:orientation="vertical"
         tools:context=".Feedfragment_notifcation_Activity">
 
@@ -137,7 +137,7 @@
                                         android:id="@+id/event_venue"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="4"
+                                        android:layout_weight="9"
                                         android:text="Venue"
                                         android:textAlignment="center"
                                         android:textColor="#FFF"
@@ -154,35 +154,18 @@
                                         android:src="@drawable/ic_place_black_24dp"
                                         android:textAlignment="center" />
 
-                                    <View
-                                        android:layout_width="1dp"
-                                        android:layout_height="match_parent"
-                                        android:background="#aaa"
-                                        android:textAlignment="center">
 
-                                    </View>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="4"
-                                        android:text="@string/event_time"
-                                        android:id="@+id/event_time"
-                                        android:textAlignment="center"
-                                        android:textColor="#FFF"
-                                        android:textSize="15sp"
-                                        android:textStyle="bold" />
 
                                     <ImageButton
                                         android:id="@+id/clock"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
+                                        android:layout_gravity="end"
                                         android:layout_weight="1"
                                         android:background="@color/colorPrimary"
                                         android:clickable="true"
                                         android:contentDescription="@string/set_event_time_calender"
-                                        android:src="@drawable/ic_access_time_black_24dp"
-                                        android:textAlignment="textEnd" />
+                                        android:src="@drawable/ic_access_time_black_24dp" />
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -229,6 +212,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="16dp"
                             android:text="description"
+                            android:textColor="@color/Black"
                             android:textSize="16sp" />
 
 

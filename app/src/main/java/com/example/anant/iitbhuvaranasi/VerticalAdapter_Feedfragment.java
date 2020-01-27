@@ -98,13 +98,13 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
         pairs[2] = new Pair<View, String>(holder.date, "feed_date");
 
 
-        holder.image.setOnClickListener(new View.OnClickListener() {
+        /*holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(mcontext, Full_screen_imageActivity.class);
+               *//* Intent intent = new Intent(mcontext, Full_screen_imageActivity.class);
                 ActivityOptions options1 = ActivityOptions.makeSceneTransitionAnimation((Activity) mcontext, pairs);
                 intent.putExtra("image", data.get(position).getImage_event());
-                mcontext.startActivity(intent, options1.toBundle());*/
+                mcontext.startActivity(intent, options1.toBundle());*//*
 
 
 
@@ -114,7 +114,7 @@ public class VerticalAdapter_Feedfragment extends RecyclerView.Adapter<VerticalA
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mcontext.startActivity(intent,options1.toBundle());
             }
-        });
+        });*/
 
         //final Pair<View, String> pair1 = Pair.create((View) holder.image, holder.image.getTransitionName());
 

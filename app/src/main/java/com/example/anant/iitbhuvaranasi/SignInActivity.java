@@ -1,5 +1,8 @@
 package com.example.anant.iitbhuvaranasi;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -38,6 +41,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private  GoogleSignInOptions gso;
     private String email,imageUri;
     private Uri personphoto;
+    Boolean isInternetPresent = false;
+    ConnectionDetector cd;
 
 
     @Override
@@ -56,6 +61,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
+        cd = new ConnectionDetector(this);
+        isInternetPresent = cd.isConnectingToInternet();
+        if(!isInternetPresent){
+            showAlertDialog(this, "No Internet Connection",
+                    "You don't have internet connection.", false);
+        }
 
         signInButton = (SignInButton) findViewById(R.id.siginbutton);
         signInButton.setOnClickListener(this);
@@ -64,6 +75,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
+        Api_Response.method(this);
         switch (v.getId()) {
             case R.id.siginbutton:
                 signIn();
@@ -115,11 +127,20 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 imageUri = personphoto.toString();
             }
             // Signed in successfully, show authenticated UI.
-            if(isEmailValid2(email)==true || isEmailValid1(email)==true)
-            {updateUI("true");}
+            isInternetPresent = false;
+            isInternetPresent = cd.isConnectingToInternet();
+            if((isEmailValid2(email)==true || isEmailValid1(email)==true)&&(isInternetPresent))
+            {updateUI("true");
+                Api_Response.method(this);}
             else
             {
-                updateUI("invalid");
+                if (!isInternetPresent) {
+                    showAlertDialog(this, "No Internet Connection",
+                            "You don't have internet connection.", false);
+                }
+                else {
+                    updateUI("invalid");
+                }
             }
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -132,6 +153,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private void updateUI(String result) {
         if(result == "true")
         {
+            if (Constants.isInternetPresent == false){
+                Api_Response.method(this);
+            }
             Intent intent= new Intent(SignInActivity.this,HomeActivity.class);
             startActivity(intent);
             finish();
@@ -141,10 +165,17 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(SignInActivity.this,"Select Valid Institute Email-id",Toast.LENGTH_SHORT).show();
             signout();
         }
-        else if(result == "false")
-        {
-            Toast.makeText(SignInActivity.this,"Something Went Wrong",Toast.LENGTH_SHORT).show();
-            signout();
+        else if(result == "false") {
+            isInternetPresent = false;
+            isInternetPresent = cd.isConnectingToInternet();
+            if (!isInternetPresent) {
+                showAlertDialog(this, "No Internet Connection",
+                        "You don't have internet connection.", false);
+            } else {
+                Log.d(result,"resultkya");
+                Toast.makeText(SignInActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                signout();
+            }
         }
     }
 
@@ -204,5 +235,27 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         SharedPreferences.Editor spreferencesEditor = spreferences.edit();
         spreferencesEditor.clear();
         spreferencesEditor.commit();
+    }
+
+    public void showAlertDialog(Context context, String title, String message, Boolean status) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle(title);
+
+        // Setting Dialog Message
+        alertDialog.setMessage(message);
+
+        // Setting alert dialog icon
+        alertDialog.setIcon((status) ? R.drawable.ic_signal_wifi_off_black_24dp : R.drawable.ic_signal_wifi_off_black_24dp);
+
+        // Setting OK Button
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
     }
 }

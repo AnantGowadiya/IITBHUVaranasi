@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.util.Log;
@@ -21,8 +22,17 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -34,6 +44,7 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
 
     ImageView image_event,image_eventfullscreen;
     String image,time;
+    boolean check;
     String event_title,event_description,event_date,event_venue,event_time;
     TextView title_event, description_event, date_event, venue_event, time_event, interested_count;
     Button  interested_button;
@@ -44,6 +55,7 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
     SharedPreferences sharedpreferences;
     View thumb1View;
     int image2;
+    private static RequestQueue mRequestQueue;
 
 
     @Override
@@ -52,7 +64,11 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
         setContentView(R.layout.activity_feedfragment_notifcation_);
 
         time=getIntent().getStringExtra("time");
+        mRequestQueue = Volley.newRequestQueue(this);
+        final String url = "http://iitbhuapp.tk/interested";
+
         Log.d("morethanyouknow",time);
+
 
         String json=getIntent().getStringExtra("all");
         Gson gson = new Gson();
@@ -70,7 +86,7 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
         location_button = (ImageButton) findViewById(R.id.location);
         description_event=findViewById(R.id.event_page_description);
         location_button.setOnClickListener(this);
-        time_event = (TextView) findViewById(R.id.event_time);
+        //time_event = (TextView) findViewById(R.id.event_time);
         clock_button = (ImageButton) findViewById(R.id.clock);
         clock_button.setOnClickListener(this);
       //  go_button = (Button) findViewById(R.id.going_button);
@@ -83,7 +99,9 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
        // title_event.setText(getIntent().getStringExtra("title"));
       //  date_event.setText(getIntent().getStringExtra("date"));
       //  image=getIntent().getStringExtra("image");
-
+        String notifid = obj.getNotifid();
+        Integer notif_id = Integer.valueOf(notifid);
+        Log.d("notidsd",notifid);
         title_event.setText(obj.getTitle_event());
         description_event.setText(obj.getDescription_event());
         Glide.with(this)
@@ -94,7 +112,17 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
         venue_event.setText(obj.getLocation());
        // view_count.setText(obj.getViewcount());
         interested_count.setText(obj.getInterestedcount());
+        final JSONObject obj2 = new JSONObject();
+        try {
+            obj2.put("roll", 18085016);
+            obj2.put("notifid",notif_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        if (obj.getInterested().equals("1")){
+            interested_button.setBackgroundColor(Color.GRAY);
+        }
 
 
 
@@ -104,7 +132,45 @@ public class Feedfragment_notifcation_Activity extends AppCompatActivity impleme
         final Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(image_event, "fullscreen");
 
+        interested_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                interested_button.setBackgroundColor(Color.GRAY);
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj2, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Integer interested = response.getInt("status");
+                            if (interested == 1){
+                            interested_count.setText(obj.getInterestedcount()+1);
+                            }
+                            Log.d("interestedbutton",interested.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                       /* Integer interest = 1;
+                        try {
+                            interest = response.getInt("status");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (interest == 1) {
+                            check = true;
+                            interested_button.setBackgroundColor(Color.GRAY);
+                        }*/
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+                mRequestQueue.add(jsonObjectRequest);
+            }
+        });
         image_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

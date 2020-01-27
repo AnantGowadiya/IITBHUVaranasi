@@ -1,5 +1,8 @@
 package com.example.anant.iitbhuvaranasi;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +37,8 @@ public class FeedFragment extends Fragment {
    // public static Integer i=0;
    SharedPreferences sharedpreferences;
     private RecyclerView mRecyclerView;
+    Boolean isInternetPresent = false;
+    ConnectionDetector cd;
    //public static ArrayList<SingleVerticalData> getVerticalData1 = new ArrayList<>();
     public static ArrayList<SingleVerticalData> getVerticalData4 = new ArrayList<>();
     public static ArrayList<SingleVerticalData> getVerticalData5;
@@ -50,10 +55,15 @@ public class FeedFragment extends Fragment {
         RecyclerView.RecycledViewPool sharedPool = new RecyclerView.RecycledViewPool();
 
 
-
+        cd = new ConnectionDetector(getContext());
+        isInternetPresent = cd.isConnectingToInternet();
+        if(!isInternetPresent){
+            showAlertDialog(getContext(), "No Internet Connection",
+                    "You don't have internet connection.", false);
+        }
         String apidata = Api_Response.method(this.getActivity());
         getVerticalData4 = VerticalDataFeed.getVerticalData3(this.getActivity());
-        Log.d("howareyou",getVerticalData4.toString());
+        Log.d("howareyou1",getVerticalData4.toString());
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -204,6 +214,29 @@ Log.d("merakuchnhihonewala",getVerticalData5.toString());
        // Log.d("horizontalarray234",getHorizontalData1.toString());
         return objects;
     }
+
+    /*public void MakeSnSnackbar(String text) {
+        hideKeyboard();
+        Snackbar snack = Snackbar.make(findViewById(R.id.container), text, Snackbar.LENGTH_LONG);
+        ViewGroup group = (ViewGroup) snack.getView();
+        for (int i = 0; i < group.getChildCount(); i++) {
+            View v = group.getChildAt(i);
+            if (v instanceof TextView) {
+                TextView t = (TextView) v;
+                t.setTextColor(Color.RED);
+            }
+        }
+        snack.show();
+    }
+
+    private void hideKeyboard() {
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }*/
     //String url= "https://firebasestorage....."
     //Glide.with(getApplicationContext()).load(url).into(imageView);
 
@@ -499,7 +532,27 @@ Log.d("merakuchnhihonewala",getVerticalData5.toString());
     }*/
 
 
+    public void showAlertDialog(Context context, String title, String message, Boolean status) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
 
+        // Setting Dialog Title
+        alertDialog.setTitle(title);
+
+        // Setting Dialog Message
+        alertDialog.setMessage(message);
+
+        // Setting alert dialog icon
+        alertDialog.setIcon((status) ? R.drawable.ic_signal_wifi_off_black_24dp : R.drawable.ic_signal_wifi_off_black_24dp);
+
+        // Setting OK Button
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
 
 
 

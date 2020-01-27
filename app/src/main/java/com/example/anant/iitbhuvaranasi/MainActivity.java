@@ -18,6 +18,8 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
 
     VideoView videoView;
+    Boolean isInternetPresent = false;
+    ConnectionDetector cd;
     private static RequestQueue mRequestQueue;
    // public static ArrayList<SingleVerticalData> getVerticalData1 = new ArrayList<>();
    // public static ArrayList<SingleHorizontaldata>getHorizontalData1=new ArrayList<>();
@@ -33,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Volley
          */
-
+        cd = new ConnectionDetector(this);
+        isInternetPresent = cd.isConnectingToInternet();
+        Constants.isInternetPresent = isInternetPresent;
         setContentView(R.layout.activity_main);
         mRequestQueue = Volley.newRequestQueue(this);
         String url = "http://iitbhuapp.tk/feedandclubs";
@@ -150,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                startActivity(new Intent(MainActivity.this,SignInActivity.class));
+                startActivity(new Intent(MainActivity.this,HomeActivity.class));
                 finish();
             }
         });

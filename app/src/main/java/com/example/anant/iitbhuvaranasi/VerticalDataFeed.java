@@ -20,6 +20,7 @@ public class VerticalDataFeed {
 
         SharedPreferences pref3 = context.getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
         String resonse_feed = pref3.getString(Constants.Response_Feed_Old, "3");
+        Log.d("reponsefeed23",resonse_feed);
         getVerticalData3 = new ArrayList<>();
 
         JSONObject response;
@@ -28,6 +29,7 @@ public class VerticalDataFeed {
             try {
                 response = new JSONObject(resonse_feed);
                 int status = response.getInt("status");
+                Log.d("8938492",response.toString());
                 Log.d("status001", Integer.toString(status));
                 if (status == 1) {
                     Log.d("status100", "1");
@@ -57,7 +59,16 @@ public class VerticalDataFeed {
                         String council_image = "http://iitbhuapp.tk" + hit.getString("councilimage");
                         String title_event = hit.getString("title");
                         String description_event = hit.getString("description");
-                        String image_event = "http://iitbhuapp.tk" + hit.getString("image");
+                        String image_event;
+                        if (hit.has("image")) {
+                            image_event = "http://iitbhuapp.tk" + hit.getString("image");
+
+                            // It exists, do your stuff
+                        } else {
+                            image_event = "http://iitbhuapp.tk/media/IMG_20190924_210044.jpg";
+
+                            // It doesn't exist, do nothing
+                        }
                         String date_event = hit.getString("datetime");
                         String location = hit.getString("location");
 

@@ -47,6 +47,7 @@ public class Api_Response {
                 SharedPreferences pref = context.getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 String rew = response.toString();
+                Log.d("reponsefeed234",rew);
                 editor.putString(Constants.Response_Feed_Old, rew);
                 editor.commit();
 

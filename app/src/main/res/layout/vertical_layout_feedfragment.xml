@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/layoutfeed"
     android:layout_height="wrap_content"
-
-    android:background="?android:attr/selectableItemBackground"
+     android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
     <ImageView
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="12dp"
-            android:id="@+id/layoutfeed"
+
             android:layout_marginRight="12dp"
             android:layout_weight="3"
             android:orientation="vertical">
